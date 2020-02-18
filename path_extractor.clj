@@ -65,13 +65,13 @@
     :learning-course-catalogue/descr "Dsecription 1"},
    :meta {:replicated-entity-ids []}})
 
-(defn is-leaf? [node]
+(defn leaf? [node]
   "Check node for leaf"
   (= (:type node) :course))
 
 (defn find-paths [tree path]
   "Find paths for each node in tree"
-  (flatten (map #(if (is-leaf? %)
+  (flatten (map #(if (leaf? %)
                    {(:name %) path}
                    (find-paths (:children %) (str path (:name %) "/")))
                 tree)))
